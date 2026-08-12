@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { euro, rate } from '@/lib/format';
-import { cn } from '@/lib/utils';
 import type { PlanCost } from '@/types';
 
 const props = defineProps<{
@@ -81,13 +80,9 @@ const cheapest = computed(() => props.planCosts[0]?.totalEur ?? 0);
                         {{ rate(cost.effectiveRateEur) }}/kWh
                     </td>
                     <td
+                        class="px-4 py-3 text-right"
                         :class="
-                            cn(
-                                'px-4 py-3 text-right',
-                                index === 0
-                                    ? 'text-good'
-                                    : 'text-ink-secondary',
-                            )
+                            index === 0 ? 'text-good' : 'text-ink-secondary'
                         "
                     >
                         {{

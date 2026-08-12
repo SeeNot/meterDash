@@ -2,7 +2,6 @@
 import { Head, router, useForm } from '@inertiajs/vue3';
 import { computed, ref } from 'vue';
 import AppLayout from '@/layouts/AppLayout.vue';
-import { cn } from '@/lib/utils';
 import planRoutes from '@/routes/plans';
 import type { TariffPlan, TariffPlanType, TariffPlanTypeOption } from '@/types';
 
@@ -232,13 +231,11 @@ function remove(id: number): void {
                         >
                             <th
                                 scope="row"
+                                class="px-4 py-3 text-left font-medium"
                                 :class="
-                                    cn(
-                                        'px-4 py-3 text-left font-medium',
-                                        plan.is_active
-                                            ? 'text-ink'
-                                            : 'text-ink-muted',
-                                    )
+                                    plan.is_active
+                                        ? 'text-ink'
+                                        : 'text-ink-muted'
                                 "
                             >
                                 {{ plan.name }}

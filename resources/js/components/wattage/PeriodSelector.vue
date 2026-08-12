@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { router } from '@inertiajs/vue3';
 import { ref, watch } from 'vue';
-import { cn } from '@/lib/utils';
 import { dashboard } from '@/routes';
 import type { Period, PeriodPreset } from '@/types';
 
@@ -58,13 +57,11 @@ function applyCustom(): void {
                 v-for="preset in PRESETS"
                 :key="preset.value"
                 type="button"
+                class="rounded-md border px-3 py-1.5 text-sm transition-colors"
                 :class="
-                    cn(
-                        'rounded-md border px-3 py-1.5 text-sm transition-colors',
-                        period.preset === preset.value
-                            ? 'border-series-1 bg-series-1 font-medium text-white'
-                            : 'border-hairline text-ink-secondary hover:text-ink',
-                    )
+                    period.preset === preset.value
+                        ? 'border-series-1 bg-series-1 font-medium text-white'
+                        : 'border-hairline text-ink-secondary hover:text-ink'
                 "
                 @click="selectPreset(preset.value)"
             >
@@ -91,13 +88,11 @@ function applyCustom(): void {
             </label>
             <button
                 type="button"
+                class="rounded-md border px-3 py-1.5 text-sm transition-colors"
                 :class="
-                    cn(
-                        'rounded-md border px-3 py-1.5 text-sm transition-colors',
-                        period.preset === 'custom'
-                            ? 'border-series-1 text-series-1'
-                            : 'border-hairline text-ink-secondary hover:text-ink',
-                    )
+                    period.preset === 'custom'
+                        ? 'border-series-1 text-series-1'
+                        : 'border-hairline text-ink-secondary hover:text-ink'
                 "
                 @click="applyCustom"
             >
