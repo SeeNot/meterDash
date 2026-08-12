@@ -2,6 +2,7 @@
 import { Head, router, useForm } from '@inertiajs/vue3';
 import { computed, ref } from 'vue';
 import AppLayout from '@/layouts/AppLayout.vue';
+import { euro, rate } from '@/lib/format';
 import planRoutes from '@/routes/plans';
 import type { TariffPlan, TariffPlanType, TariffPlanTypeOption } from '@/types';
 
@@ -29,13 +30,6 @@ const rateHint = computed(
 function reset(): void {
     editingId.value = null;
     form.clearErrors();
-    form.defaults({
-        name: '',
-        type: 'fixed',
-        energy_rate_eur: '0.18',
-        standing_charge_eur: '3.00',
-        is_active: true,
-    });
     form.reset();
 }
 
@@ -249,10 +243,10 @@ function remove(id: number): void {
                                 {{ plan.typeLabel }}
                             </td>
                             <td class="px-4 py-3 text-right text-ink-secondary">
-                                {{ plan.energy_rate_eur.toFixed(4) }}
+                                {{ rate(plan.energy_rate_eur) }}
                             </td>
                             <td class="px-4 py-3 text-right text-ink-secondary">
-                                {{ plan.standing_charge_eur.toFixed(2) }}
+                                {{ euro(plan.standing_charge_eur) }}
                             </td>
                             <td class="px-4 py-3 text-right whitespace-nowrap">
                                 <button

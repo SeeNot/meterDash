@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Data\TariffPlanData;
 use App\Enums\TariffPlanType;
 use App\Http\Requests\StoreTariffPlanRequest;
 use App\Http\Requests\UpdateTariffPlanRequest;
@@ -22,21 +23,9 @@ class TariffPlanController extends Controller
             'plans' => TariffPlan::query()
                 ->orderBy('name')
                 ->get()
-                ->map(fn (TariffPlan $plan): array => [
-                    'id' => $plan->id,
-                    'name' => $plan->name,
-                    'type' => $plan->type->value,
-                    'typeLabel' => $plan->type->label(),
-                    'energy_rate_eur' => $plan->energy_rate_eur,
-                    'standing_charge_eur' => $plan->standing_charge_eur,
-                    'is_active' => $plan->is_active,
-                ])
+                ->map(fn (TariffPlan $plan): array => TariffPlanData::fromModel($plan)->toArray())
                 ->all(),
-            'types' => array_map(fn (TariffPlanType $type): array => [
-                'value' => $type->value,
-                'label' => $type->label(),
-                'rateDescription' => $type->rateDescription(),
-            ], TariffPlanType::cases()),
+            'types' => TariffPlanType::options(),
         ]);
     }
 

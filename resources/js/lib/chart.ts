@@ -114,4 +114,37 @@ export function axisStyle(theme: ChartTheme) {
     };
 }
 
+/**
+ * Top-aligned legend styling shared by every chart.
+ */
+export function legendOptions(theme: ChartTheme) {
+    return {
+        display: true,
+        position: 'top',
+        align: 'end',
+        labels: {
+            color: theme.inkSecondary,
+            boxWidth: 10,
+            boxHeight: 10,
+            usePointStyle: true,
+            pointStyle: 'circle',
+        },
+    } as const;
+}
+
+/**
+ * Tooltip chrome shared by every chart; callers add their own `callbacks`.
+ */
+export function tooltipBaseOptions(theme: ChartTheme) {
+    return {
+        backgroundColor: theme.surface,
+        titleColor: theme.ink,
+        bodyColor: theme.inkSecondary,
+        borderColor: theme.gridline,
+        borderWidth: 1,
+        padding: 10,
+        usePointStyle: true,
+    };
+}
+
 export { Chart };

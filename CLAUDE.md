@@ -30,7 +30,7 @@ Run everything through `composer` scripts rather than calling the underlying too
 - **Shared Inertia props** are defined once in `app/Http/Middleware/HandleInertiaRequests.php::share()` (currently `name` and `auth.user`) — extend this rather than passing the same prop from every controller.
 - **`AppServiceProvider::configureDefaults()`** sets app-wide defaults worth knowing about: dates are `CarbonImmutable`, destructive DB commands (`DB::prohibitDestructiveCommands`) are blocked in production, and password rules only tighten (12+ chars, mixed case, symbols, uncompromised check) in production.
 - **Database is SQLite** locally (`database/database.sqlite`), driven by `DB_CONNECTION` in `.env`.
-- **Styling** is Tailwind CSS v4 via `@tailwindcss/vite` (no separate Tailwind config file — see `resources/css/app.css`), with `prettier-plugin-tailwindcss` sorting classes and `clsx`/`tailwind-merge` (`cn` helper convention) for conditional class composition.
+- **Styling** is Tailwind CSS v4 via `@tailwindcss/vite` (no separate Tailwind config file — see `resources/css/app.css`), with `prettier-plugin-tailwindcss` sorting classes. Conditional classes are plain ternaries in `:class` bindings (Vue merges static `class` and `:class` natively); reach for `clsx`/`tailwind-merge` only if a case genuinely needs to merge conflicting Tailwind utility classes.
 - **Charts** use `chart.js` via `vue-chartjs` — the natural fit for rendering wattage/metering data once that feature is built out.
 
 ## Repo-specific rules (from Laravel Boost / AGENTS.md)

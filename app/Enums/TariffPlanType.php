@@ -30,4 +30,18 @@ enum TariffPlanType: string
             self::Dynamic => 'Supplier margin added on top of the monthly market price.',
         };
     }
+
+    /**
+     * The options shown in the plan type picker.
+     *
+     * @return list<array{value: string, label: string, rateDescription: string}>
+     */
+    public static function options(): array
+    {
+        return array_map(fn (self $type): array => [
+            'value' => $type->value,
+            'label' => $type->label(),
+            'rateDescription' => $type->rateDescription(),
+        ], self::cases());
+    }
 }

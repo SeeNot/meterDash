@@ -2,7 +2,12 @@
 import type { ChartData, ChartOptions } from 'chart.js';
 import { computed } from 'vue';
 import { Bar } from 'vue-chartjs';
-import { axisStyle, useChartTheme } from '@/lib/chart';
+import {
+    axisStyle,
+    legendOptions,
+    tooltipBaseOptions,
+    useChartTheme,
+} from '@/lib/chart';
 import { euro } from '@/lib/format';
 import type { PlanCost } from '@/types';
 
@@ -46,26 +51,9 @@ const options = computed<ChartOptions<'bar'>>(() => ({
     indexAxis: 'y',
     interaction: { mode: 'index', intersect: false },
     plugins: {
-        legend: {
-            display: true,
-            position: 'top',
-            align: 'end',
-            labels: {
-                color: theme.value.inkSecondary,
-                boxWidth: 10,
-                boxHeight: 10,
-                usePointStyle: true,
-                pointStyle: 'circle',
-            },
-        },
+        legend: legendOptions(theme.value),
         tooltip: {
-            backgroundColor: theme.value.surface,
-            titleColor: theme.value.ink,
-            bodyColor: theme.value.inkSecondary,
-            borderColor: theme.value.gridline,
-            borderWidth: 1,
-            padding: 10,
-            usePointStyle: true,
+            ...tooltipBaseOptions(theme.value),
             callbacks: {
                 label: (context) =>
                     ` ${context.dataset.label}: ${euro(Number(context.parsed.x))}`,

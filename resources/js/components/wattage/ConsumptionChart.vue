@@ -2,7 +2,12 @@
 import type { ChartData, ChartOptions } from 'chart.js';
 import { computed } from 'vue';
 import { Line } from 'vue-chartjs';
-import { axisStyle, useChartTheme } from '@/lib/chart';
+import {
+    axisStyle,
+    legendOptions,
+    tooltipBaseOptions,
+    useChartTheme,
+} from '@/lib/chart';
 import { kwh } from '@/lib/format';
 import type { ConsumptionSeries, ConsumptionStats } from '@/types';
 
@@ -48,27 +53,10 @@ const options = computed<ChartOptions<'line'>>(() => ({
     responsive: true,
     interaction: { mode: 'index', intersect: false },
     plugins: {
-        legend: {
-            display: true,
-            position: 'top',
-            align: 'end',
-            labels: {
-                color: theme.value.inkSecondary,
-                boxWidth: 10,
-                boxHeight: 10,
-                usePointStyle: true,
-                pointStyle: 'circle',
-            },
-        },
+        legend: legendOptions(theme.value),
         tooltip: {
-            backgroundColor: theme.value.surface,
-            titleColor: theme.value.ink,
-            bodyColor: theme.value.inkSecondary,
-            borderColor: theme.value.gridline,
-            borderWidth: 1,
-            padding: 10,
+            ...tooltipBaseOptions(theme.value),
             displayColors: true,
-            usePointStyle: true,
             callbacks: {
                 label: (context) =>
                     ` ${context.dataset.label}: ${kwh(Number(context.parsed.y), 2)} kWh/day`,

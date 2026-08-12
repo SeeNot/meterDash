@@ -6,19 +6,10 @@ namespace App\Http\Requests;
 
 use App\Models\WattageEntry;
 use App\Rules\MonotonicMeterReading;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdateWattageEntryRequest extends FormRequest
+class UpdateWattageEntryRequest extends WattageEntryRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -43,19 +34,6 @@ class UpdateWattageEntryRequest extends FormRequest
                 new MonotonicMeterReading($this->string('measured_at')->toString() ?: null, $id),
             ],
             'note' => ['nullable', 'string', 'max:255'],
-        ];
-    }
-
-    /**
-     * Get the custom validation messages.
-     *
-     * @return array<string, string>
-     */
-    public function messages(): array
-    {
-        return [
-            'measured_at.unique' => 'A reading has already been recorded for that date.',
-            'measured_at.before_or_equal' => 'A reading cannot be dated in the future.',
         ];
     }
 }
