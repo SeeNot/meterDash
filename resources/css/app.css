@@ -1,0 +1,68 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+/*
+ * Chart and chrome tokens. Charts read these at runtime via getComputedStyle,
+ * so the canvas and the surrounding DOM always agree on the palette. The
+ * categorical slots are validated for colour-vision deficiency in both modes.
+ */
+:root {
+    color-scheme: light;
+
+    --surface: #fcfcfb;
+    --plane: #f9f9f7;
+    --ink: #0b0b0b;
+    --ink-secondary: #52514e;
+    --ink-muted: #898781;
+    --gridline: #e1e0d9;
+    --baseline: #c3c2b7;
+    --hairline: rgb(11 11 11 / 0.1);
+    --series-1: #2a78d6;
+    --series-2: #eb6834;
+    --de-emphasis: #c3c2b7;
+    --good: #006300;
+    --critical: #d03b3b;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        color-scheme: dark;
+
+        --surface: #1a1a19;
+        --plane: #0d0d0d;
+        --ink: #ffffff;
+        --ink-secondary: #c3c2b7;
+        --ink-muted: #898781;
+        --gridline: #2c2c2a;
+        --baseline: #383835;
+        --hairline: rgb(255 255 255 / 0.1);
+        --series-1: #3987e5;
+        --series-2: #d95926;
+        --de-emphasis: #52514e;
+        --good: #0ca30c;
+        --critical: #d03b3b;
+    }
+}
+
+@theme inline {
+    --font-sans:
+        Instrument Sans, ui-sans-serif, system-ui, sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+        'Noto Color Emoji';
+
+    --color-surface: var(--surface);
+    --color-plane: var(--plane);
+    --color-ink: var(--ink);
+    --color-ink-secondary: var(--ink-secondary);
+    --color-ink-muted: var(--ink-muted);
+    --color-gridline: var(--gridline);
+    --color-baseline: var(--baseline);
+    --color-hairline: var(--hairline);
+    --color-series-1: var(--series-1);
+    --color-series-2: var(--series-2);
+    --color-de-emphasis: var(--de-emphasis);
+    --color-good: var(--good);
+    --color-critical: var(--critical);
+}
